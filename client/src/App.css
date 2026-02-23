@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #4e73df;
+    --secondary: #858796;
+    --success: #1cc88a;
+    --info: #36b9cc;
+    --warning: #f6c23e;
+    --danger: #e74a3b;
+    --dark: #1a1c23;
+    --light: #f8f9fc;
+    --sidebar-width: 260px;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    color: #333;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.auth-mode .main-content {
+    width: 100%;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+    color: white;
+    min-height: 100vh;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-profile-section {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.admin-profile-section img {
+    transition: transform 0.3s ease;
+}
+
+.admin-profile-section:hover img {
+    transform: scale(1.1);
+}
+
+.sidebar-menu {
+    padding: 1rem 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid white;
+}
+
+.menu-item .icon {
+    margin-right: 15px;
+    font-size: 1.1rem;
+}
+
+.logout-btn {
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+/* Main Content area */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f7fe;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.top-navbar {
+    background: rgba(26, 28, 35, 0.95);
+    backdrop-filter: blur(10px);
+    height: 70px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-toggle-btn {
+    color: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    transform: rotate(90deg);
+}
+
+.profile-dropdown {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.profile-dropdown:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.content-area {
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Cards & Components */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+    padding: 1.8rem;
+    color: white;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    clip-path: circle(30% at 90% 10%);
+    z-index: -1;
+    transition: 0.5s ease;
+}
+
+.stat-card:hover::before {
+    clip-path: circle(100% at 50% 50%);
+}
+
+.blue-gradient {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+}
+
+.purple-gradient {
+    background: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%);
+}
+
+.green-gradient {
+    background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%);
+}
+
+.red-gradient {
+    background: linear-gradient(135deg, #e74a3b 0%, #be2617 100%);
+}
+
+/* Table Animations */
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: scale(1.005);
+}
+
+/* Button Premium styling */
+.btn-primary {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(78, 115, 223, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Form focus animations */
+.form-control:focus,
+.form-select:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.1);
+    transform: scale(1.01);
+}
+
+/* Custom Floating Animation */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.auth-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Transitions */
+.sidebar.closed {
+    margin-left: calc(-1 * var(--sidebar-width));
+}
