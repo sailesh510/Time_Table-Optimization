@@ -1,0 +1,151 @@
+
+=== USERS (1 documents) ===
+[
+  {
+    "_id": "699bdcb4853de2437859785c",
+    "name": "sailesh",
+    "email": "saileshfeb14@gmail.com",
+    "password": "$2b$10$ItZM12Ftu6/A3OMesMRsieZDHEHJJBWtMCKIj2/mWwEn.ZQ1JhqtK",
+    "role": "admin",
+    "createdAt": "2026-02-23T04:51:00.288Z",
+    "updatedAt": "2026-02-23T04:51:00.288Z",
+    "__v": 0
+  }
+]
+
+=== CLASHLOGS (1 documents) ===
+[
+  {
+    "_id": "69abc02861d4c0daea726946",
+    "facultyId": "699bf77f853de24378597aa8",
+    "subjectId": "699bf7d8853de24378597ad4",
+    "day": "Monday",
+    "time": "09:00 - 10:00",
+    "roomNumber": "102",
+    "clashType": "Faculty",
+    "message": "Faculty is already busy in another session.",
+    "createdAt": "2026-03-07T06:05:28.868Z",
+    "updatedAt": "2026-03-07T06:05:28.868Z",
+    "__v": 0
+  }
+]
+
+=== FACULTIES (6 documents) ===
+[
+  {
+    "_id": "699bf77f853de24378597aa8",
+    "name": "sailesh",
+    "department": "AI&DS",
+    "createdAt": "2026-02-23T06:45:19.387Z",
+    "updatedAt": "2026-02-23T06:45:19.387Z",
+    "__v": 0
+  },
+  {
+    "_id": "699bf78d853de24378597aad",
+    "name": "MUTHU",
+    "department": "CSE",
+    "createdAt": "2026-02-23T06:45:33.224Z",
+    "updatedAt": "2026-02-23T06:45:33.224Z",
+    "__v": 0
+  },
+  {
+    "_id": "699bf795853de24378597ab2",
+    "name": "KAVIN",
+    "department": "AI&DS",
+    "createdAt": "2026-02-23T06:45:42.000Z",
+    "updatedAt": "2026-02-23T06:45:42.000Z",
+    "__v": 0
+  },
+  {
+    "_id": "699bf79f853de24378597ab7",
+    "name": "PRANAV",
+    "department": "IT",
+    "createdAt": "2026-02-23T06:45:51.095Z",
+    "updatedAt": "2026-02-23T06:45:51.095Z",
+    "__v": 0
+  },
+  {
+    "_id": "699bf7a7853de24378597abc",
+    "name": "NIRMAL",
+    "department": "IT",
+    "createdAt": "2026-02-23T06:45:59.336Z",
+    "updatedAt": "2026-02-23T06:45:59.336Z",
+    "__v": 0
+  },
+  {
+    "_id": "699bf7ad853de24378597ac1",
+    "name": "VARUN",
+    "department": "CSE",
+    "createdAt": "2026-02-23T06:46:05.638Z",
+    "updatedAt": "2026-02-23T06:46:05.638Z",
+    "__v": 0
+  }
+]
+
+=== TIMETABLES (3 documents) ===
+[
+  {
+    "_id": "69abbe2261d4c0daea7268c2",
+    "facultyId": "699bf77f853de24378597aa8",
+    "subjectId": "699bf7d8853de24378597ad4",
+    "day": "Monday",
+    "time": "09:00 - 10:00",
+    "roomNumber": "101",
+    "createdAt": "2026-03-07T05:56:50.279Z",
+    "updatedAt": "2026-03-07T05:56:50.279Z",
+    "__v": 0
+  },
+  {
+    "_id": "69abbe2f61d4c0daea7268c7",
+    "facultyId": "699bf78d853de24378597aad",
+    "subjectId": "69abbdf061d4c0daea7268ae",
+    "day": "Monday",
+    "time": "10:00 - 11:00",
+    "roomNumber": "101",
+    "createdAt": "2026-03-07T05:57:03.416Z",
+    "updatedAt": "2026-03-07T05:57:03.416Z",
+    "__v": 0
+  },
+  {
+    "_id": "69abbe3b61d4c0daea7268cc",
+    "facultyId": "699bf795853de24378597ab2",
+    "subjectId": "69abbe1261d4c0daea7268b3",
+    "day": "Monday",
+    "time": "11:00 - 12:00",
+    "roomNumber": "101",
+    "createdAt": "2026-03-07T05:57:15.903Z",
+    "updatedAt": "2026-03-07T05:57:15.903Z",
+    "__v": 0
+  }
+]
+
+=== SUBJECTS (3 documents) ===
+[
+  {
+    "_id": "699bf7d8853de24378597ad4",
+    "name": "DATA STRUCTURE",
+    "code": "D-101",
+    "department": "AI&DS",
+    "createdAt": "2026-02-23T06:46:48.636Z",
+    "updatedAt": "2026-02-23T06:46:48.636Z",
+    "__v": 0
+  },
+  {
+    "_id": "69abbdf061d4c0daea7268ae",
+    "name": "COMPUTER NETWORKINH",
+    "code": "CN-102",
+    "department": "AI&DS",
+    "createdAt": "2026-03-07T05:56:01.037Z",
+    "updatedAt": "2026-03-07T05:56:01.037Z",
+    "__v": 0
+  },
+  {
+    "_id": "69abbe1261d4c0daea7268b3",
+    "name": "OPERATING SYSTEM",
+    "code": "OS-103",
+    "department": "AI&DS",
+    "createdAt": "2026-03-07T05:56:34.478Z",
+    "updatedAt": "2026-03-07T05:56:34.478Z",
+    "__v": 0
+  }
+]

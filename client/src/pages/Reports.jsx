@@ -20,8 +20,8 @@ const Reports = () => {
         doc.text('Faculty Timetable Report', 14, 15);
 
         const tableData = timetables.map(t => [
-            t.facultyId.name,
-            t.subjectId.name,
+            t.facultyId?.name || 'N/A',
+            t.subjectId?.name || 'N/A',
             t.day,
             t.time,
             t.roomNumber
@@ -71,8 +71,8 @@ const Reports = () => {
                     <tbody>
                         {timetables.map(t => (
                             <tr key={t._id}>
-                                <td>{t.facultyId.name}</td>
-                                <td>{t.subjectId.name}</td>
+                                <td>{t.facultyId?.name || 'N/A'}</td>
+                                <td>{t.subjectId?.name || 'N/A'}</td>
                                 <td>{t.day}</td>
                                 <td>{t.time}</td>
                                 <td>{t.roomNumber}</td>

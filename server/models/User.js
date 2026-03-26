@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
     avatar: { type: String, default: 'https://ui-avatars.com/api/?name=Admin&background=4e73df&color=fff' },
 }, { timestamps: true });
 
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
+userSchema.pre('save', async function () {
+    if (!this.isModified('password')) return;
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
 });

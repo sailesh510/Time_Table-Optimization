@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchFaculties, fetchSubjects, addTimetable } from '../services/api';
+import { FaClock, FaUserTie, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
 const TimetableCreate = () => {
     const [faculties, setFaculties] = useState([]);
@@ -12,6 +13,8 @@ const TimetableCreate = () => {
         roomNumber: '',
     });
     const [msg, setMsg] = useState({ type: '', text: '' });
+    const [freeSessions, setFreeSessions] = useState([]);
+    const [freeFaculty, setFreeFaculty] = useState([]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -32,12 +35,31 @@ const TimetableCreate = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMsg({ type: '', text: '' });
+        setFreeSessions([]);
+        setFreeFaculty([]);
         try {
             await addTimetable(formData);
             setMsg({ type: 'success', text: 'Timetable entry added successfully!' });
         } catch (err) {
-            setMsg({ type: 'danger', text: err.response?.data?.message || 'Error occurred' });
+            const data = err.response?.data;
+            setMsg({ type: 'danger', text: data?.message || 'Error occurred' });
+            if (data?.freeSessions) setFreeSessions(data.freeSessions);
+            if (data?.freeFaculty) setFreeFaculty(data.freeFaculty);
         }
+    };
+
+    const handlePickSession = (slot) => {
+        setFormData({ ...formData, time: slot });
+        setMsg({ type: 'info', text: `Time slot changed to "${slot}". Click Save to try again.` });
+        setFreeSessions([]);
+        setFreeFaculty([]);
+    };
+
+    const handlePickFaculty = (faculty) => {
+        setFormData({ ...formData, facultyId: faculty._id });
+        setMsg({ type: 'info', text: `Faculty changed to "${faculty.name}". Click Save to try again.` });
+        setFreeSessions([]);
+        setFreeFaculty([]);
     };
 
     return (
@@ -46,7 +68,83 @@ const TimetableCreate = () => {
             <div className="row">
                 <div className="col-md-6">
                     <div className="card shadow-sm p-4">
-                        {msg.text && <div className={`alert alert-${msg.type}`}>{msg.text}</div>}
+                        {msg.text && (
+                            <div className={`alert alert-${msg.type} d-flex align-items-center`}>
+                                {msg.type === 'success' && <FaCheckCircle className="me-2" />}
+                                {msg.type === 'danger' && <FaExclamationTriangle className="me-2" />}
+                                {msg.text}
+                            </div>
+                        )}
+
+                        {/* Suggestions Panel */}
+                        {(freeSessions.length > 0 || freeFaculty.length > 0) && (
+                            <div className="card border-warning mb-3" style={{ background: '#fffbeb' }}>
+                                <div className="card-body">
+                                    {freeSessions.length > 0 && (
+                                        <div className="mb-3">
+                                            <h6 className="fw-bold text-dark mb-2">
+                                                <FaClock className="me-2 text-success" />
+                                                Free Sessions (same day, same faculty)
+                                            </h6>
+                                            <p className="text-muted small mb-2">Click a slot to auto-fill</p>
+                                            <div className="d-flex flex-wrap gap-2">
+                                                {freeSessions.map(slot => (
+                                                    <button
+                                                        key={slot}
+                                                        type="button"
+                                                        className="btn btn-sm btn-outline-success rounded-pill px-3"
+                                                        onClick={() => handlePickSession(slot)}
+                                                        style={{ transition: 'all 0.2s' }}
+                                                    >
+                                                        {slot}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {freeSessions.length === 0 && (
+                                        <div className="mb-3">
+                                            <h6 className="fw-bold text-danger mb-1">
+                                                <FaClock className="me-2" />
+                                                No free sessions available for this faculty on this day
+                                            </h6>
+                                        </div>
+                                    )}
+                                    {freeFaculty.length > 0 && (
+                                        <div>
+                                            <h6 className="fw-bold text-dark mb-2">
+                                                <FaUserTie className="me-2 text-primary" />
+                                                Available Faculty (same day & time)
+                                            </h6>
+                                            <p className="text-muted small mb-2">Click a faculty to auto-fill</p>
+                                            <div className="list-group list-group-flush">
+                                                {freeFaculty.map(f => (
+                                                    <button
+                                                        key={f._id}
+                                                        type="button"
+                                                        className="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 rounded mb-1"
+                                                        onClick={() => handlePickFaculty(f)}
+                                                        style={{ background: '#f0f7ff', cursor: 'pointer', transition: 'all 0.2s' }}
+                                                    >
+                                                        <span className="fw-bold">{f.name}</span>
+                                                        <span className="badge bg-secondary rounded-pill">{f.department}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {freeFaculty.length === 0 && (
+                                        <div>
+                                            <h6 className="fw-bold text-danger mb-1">
+                                                <FaUserTie className="me-2" />
+                                                No other faculty available at this time slot
+                                            </h6>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <label className="form-label">Select Faculty</label>
@@ -115,6 +213,10 @@ const TimetableCreate = () => {
                             <p className="mb-1 fw-bold">Example Clash:</p>
                             <p className="small text-danger m-0">Faculty "Dr. Smith" already assigned to 09:00 - 10:00 on Monday.</p>
                         </div>
+                        <div className="mt-3 p-3 bg-white rounded shadow-sm">
+                            <p className="mb-1 fw-bold text-success">💡 Smart Suggestions:</p>
+                            <p className="small text-muted m-0">When a clash occurs, the system will show you which time slots are free for the faculty, and which other faculty are available at the selected time.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,3 +225,4 @@ const TimetableCreate = () => {
 };
 
 export default TimetableCreate;
+
