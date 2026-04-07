@@ -29,12 +29,16 @@ const FacultyManage = () => {
     const handleAdd = async (e) => {
         e.preventDefault();
         try {
-            await addFaculty({ name, department: dept });
+            const { data } = await addFaculty({ name, department: dept });
             setName('');
             setDept('');
             loadFaculties();
+            // Optional: Success feedback could be added here
         } catch (err) {
-            alert('Error adding faculty');
+            console.error('Error adding faculty:', err);
+            if (err.response && err.response.status !== 401) {
+                alert(err.response.data.message || 'Error adding faculty');
+            }
         }
     };
 

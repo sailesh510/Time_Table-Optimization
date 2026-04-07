@@ -12,6 +12,17 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+API.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('userInfo');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
 export const login = (data) => API.post('/auth/login', data);
 export const register = (data) => API.post('/auth/register', data);
 
