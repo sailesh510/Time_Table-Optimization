@@ -5,9 +5,20 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
-    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "build": "npm install && cd client && npm install && npm run build",
     "dev": "concurrently \"cd server && npm start\" \"cd client && npm run dev\"",
     "heroku-postbuild": "npm run build"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=18.0.0"
